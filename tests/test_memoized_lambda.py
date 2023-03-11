@@ -46,7 +46,7 @@ async def test_invoke_when_transform_returns_value(cache_result):
 @pytest.mark.parametrize("cache_result", (True, False))
 async def test_invoke_when_transform_raises_exception(cache_result):
     def response_transform(request, response):
-        raise Exception()
+        raise RuntimeError()
 
     lambda_client = Mock(invoke=Mock())
     memoized_lambda = MemoizedLambda(
