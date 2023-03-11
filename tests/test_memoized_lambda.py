@@ -16,7 +16,6 @@ def serialize(obj):
 
 
 @pytest.mark.parametrize("cache_result", (True, False))
-@pytest.mark.asyncio
 async def test_invoke_when_transform_returns_value(cache_result):
     lambda_client = Mock(invoke=Mock())
     memoized_lambda = MemoizedLambda(
@@ -45,7 +44,6 @@ async def test_invoke_when_transform_returns_value(cache_result):
 
 
 @pytest.mark.parametrize("cache_result", (True, False))
-@pytest.mark.asyncio
 async def test_invoke_when_transform_raises_exception(cache_result):
     def response_transform(request, response):
         raise Exception()
@@ -77,7 +75,6 @@ async def test_invoke_when_transform_raises_exception(cache_result):
         lambda_client.invoke.assert_called_once_with(FunctionName=FUNCTION_NAME, Payload=serialize(REQUEST_PAYLOAD))
 
 
-@pytest.mark.asyncio
 async def test_invoke_should_raise_exception_on_status_error():
     lambda_client = Mock(invoke=Mock())
     memoized_lambda = MemoizedLambda(
@@ -96,7 +93,6 @@ async def test_invoke_should_raise_exception_on_status_error():
     lambda_client.invoke.assert_called_once_with(FunctionName=FUNCTION_NAME, Payload=serialize(REQUEST_PAYLOAD))
 
 
-@pytest.mark.asyncio
 async def test_invoke_should_raise_exception_on_payload_read_error():
     lambda_client = Mock(invoke=Mock())
     memoized_lambda = MemoizedLambda(
@@ -116,7 +112,6 @@ async def test_invoke_should_raise_exception_on_payload_read_error():
     lambda_client.invoke.assert_called_once_with(FunctionName=FUNCTION_NAME, Payload=serialize(REQUEST_PAYLOAD))
 
 
-@pytest.mark.asyncio
 async def test_concurrent_invoke_calls_should_invoke_lambda_once():
     lambda_client = Mock(invoke=Mock())
     memoized_lambda = MemoizedLambda(
