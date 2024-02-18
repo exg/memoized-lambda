@@ -17,7 +17,7 @@ from __future__ import annotations
 import asyncio
 import json
 from collections.abc import Callable, MutableMapping
-from typing import TYPE_CHECKING, Any, Generic, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, Generic, TypeVar, cast
 
 from botocore.exceptions import ClientError
 
@@ -38,7 +38,7 @@ class MemoizedLambda(Generic[_T]):
         lambda_client: LambdaClient,
         function_name: str,
         cache: MutableMapping[bytes, asyncio.Task[_T]],
-        cache_filter: Callable[[Union[_T, Exception]], bool] = lambda _x: True,
+        cache_filter: Callable[[_T | Exception], bool] = lambda _x: True,
         request_transform: Callable[[Any], bytes] = lambda x: json.dumps(x, sort_keys=True).encode("utf-8"),
         response_transform: Callable[[bytes, bytes], _T] = lambda _x, y: cast(_T, json.loads(y)),
     ):
