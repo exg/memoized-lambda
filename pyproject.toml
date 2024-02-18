@@ -4,25 +4,23 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
 
-[tool.black]
-safe = true
-line-length = 120
-
-[tool.isort]
-profile = "black"
-line_length = 120
-
 [tool.mypy]
 show_error_codes = true
 strict = true
 
-[tool.pylint.master]
-disable = [
-    "missing-docstring",
-    "too-few-public-methods",
-]
-max-args = 7
-max-line-length = 120
-
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 120
+src = ["src"]
+target-version = "py39"
+lint.select = [
+  "F",
+  "E",
+  "I",
+  "UP",
+  "PLE",
+  "PLW",
+  "RUF",
+]

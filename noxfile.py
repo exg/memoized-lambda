@@ -14,10 +14,9 @@ PYTHON_VERSIONS = [
 @nox.session(python=PYTHON_VERSIONS[0])
 def lint(session):
     session.install(".[dev,test]")
-    session.run("black", "--check", "src", "tests")
-    session.run("isort", "--check", "src", "tests")
+    session.run("ruff", "format", "--check", "src", "tests")
+    session.run("ruff", "check", "src", "tests")
     session.run("mypy", "src")
-    session.run("pylint", "src", "tests")
 
 
 @nox.session(python=PYTHON_VERSIONS)
