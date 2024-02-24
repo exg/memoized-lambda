@@ -2,6 +2,40 @@
 requires = ["setuptools", "setuptools_scm", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "memoized-lambda"
+dynamic = ["version"]
+authors = [
+    { name = "Emanuele Giaquinta", email = "emanuele.giaquinta@gmail.com" },
+]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "botocore",
+]
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = [
+    "mypy",
+    "ruff",
+    "boto3-stubs[lambda]",
+]
+test = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+]
+
+[project.urls]
+Homepage = "https://github.com/exg/memoized-lambda"
+
 [tool.setuptools_scm]
 
 [tool.mypy]
