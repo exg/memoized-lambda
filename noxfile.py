@@ -3,12 +3,8 @@ import nox
 nox.options.default_venv_backend = "venv"
 nox.options.reuse_existing_virtualenvs = True
 
-PYTHON_VERSIONS = [
-    "3.9",
-    "3.10",
-    "3.11",
-    "3.12",
-]
+PYPROJECT = nox.project.load_toml("pyproject.toml")
+PYTHON_VERSIONS = nox.project.python_versions(PYPROJECT)
 
 
 @nox.session(python=PYTHON_VERSIONS[0])
